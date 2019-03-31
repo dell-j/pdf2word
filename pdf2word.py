@@ -150,7 +150,7 @@ def read_pdf(filename,start,end):
 
 #保存文本文件
 def save_text(filename,text):
-    with open(filename,'w') as text_file:
+    with open(filename,'w',encoding='utf-8') as text_file:
         text_file.write(text)
 
 def pdf_to_word(filename,page_start=1,page_end=1):
@@ -176,7 +176,7 @@ def pdf_to_word(filename,page_start=1,page_end=1):
                 list_g = lookup_dict(read_csv('gre.csv'),new_words)
                 list_g = [word for word in list_g if (word not in list_m) and (word not in list_c4) and (word not in list_c6)] #GRE词汇（不包刮四六高）
                 list_ox = lookup_dict(read_csv('oxford.csv'),new_words)
-                list_ox = [word for word in list_ox if (word not in list_m) and (word not in list_c4) and (word not in list_c6) and (word not in list_g)] #用简明牛津词典库垫底
+                list_ox = [word for word in list_ox if (word not in list_m) and (word not in list_c4) and (word not in list_c6) and (word not in list_g) and (len(word)>2)] #用简明牛津词典库垫底
                 title = '#'+shotname+'_Page'+str(page_start+count)+'\n'
                 total_text = total_text + title + ('\n').join(list_m + list_c4 +list_c6 + list_g + list_ox) + '\n'
             count = count + 1
